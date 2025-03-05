@@ -21,52 +21,36 @@ NAME : MOHAMMED HAMZA M
 RegisterNumber:  24900511
 */
 ```
-
-plt.show()import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.metrics import mean_absolute_error,mean_squared_error
-df=pd.read_csv('student_scores.csv')
-print(df)
-df.head(0)
-df.tail(0)
-print(df.head())
-print(df.tail())
-x = df.iloc[:,:-1].values
-print(x)
-y = df.iloc[:,1].values
-print(y)
-from sklearn.model_selection import train_test_split
-x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=1/3,random_state=0)
-from sklearn.linear_model import LinearRegression
-regressor = LinearRegression()
-regressor.fit(x_train,y_train)
-y_pred = regressor.predict(x_test)
-print(y_pred)
-print(y_test)
-#Graph plot for training data
-plt.scatter(x_train,y_train,color='black')
-plt.plot(x_train,regressor.predict(x_train),color='blue')
-plt.title("Hours vs Scores(Training set)")
-plt.xlabel("Hours")
-plt.ylabel("Scores")
-#Graph plot for test data
-plt.scatter(x_test,y_test,color='black')
-plt.plot(x_train,regressor.predict(x_train),color='red')
-plt.title("Hours vs Scores(Testing set)")
-plt.xlabel("Hours")
-plt.ylabel("Scores")
+#Preprocessing Input data
+X = np.array(eval(input()))
+Y = np.array(eval(input()))
+#Mean
+X_mean =np.mean(X)
+Y_mean =np.mean(Y)
+num=0 #for slope
+denom=0 #for slope
+#to find sum of (xi-x') & (yi-y') & (xi-x')^2
+for i in range(len(X)):
+    num+=(X[i] -X_mean)*(Y[i]-Y_mean)
+    denom+= (X[i]-X_mean)**2
+#calculate slope   
+m=num/denom
+#calculate intercept
+b=Y_mean-m*X_mean
+print(m,b)
+#Line equation
+y_predicted=m*X+b
+print(y_predicted)
+#to plot graph
+plt.scatter(X,Y)
+plt.plot(X,y_predicted,color='red')
 plt.show()
-mse=mean_absolute_error(y_test,y_pred)
-print('MSE = ',mse)
-mae=mean_absolute_error(y_test,y_pred)
-print('MAE = ',mae)
-rmse=np.sqrt(mse)
-print("RMSE= ",rmse)
 
 ## Output:
-![simple linear regression model for predicting the marks scored](sam.![Screenshot 2025-03-05 085022](https://github.com/user-attachments/assets/ccb37533-fd85-43cb-b5d9-f3216918db21)
-png)
+![Screenshot 2025-03-05 085022](https://github.com/user-attachments/assets/4b6bbdd8-2a0c-4cd5-8c1f-ebde63166609)
+
 
 
 ## Result:
